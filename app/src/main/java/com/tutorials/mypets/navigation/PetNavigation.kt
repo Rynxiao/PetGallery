@@ -6,6 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tutorials.mypets.screens.SplashScreen
+import com.tutorials.mypets.screens.detail.DetailScreen
+import com.tutorials.mypets.screens.home.HomeScreen
 
 @ExperimentalComposeUiApi
 @Composable
@@ -14,6 +16,14 @@ fun PetNavigation() {
     NavHost(navController = navController, startDestination = PetScreens.SplashScreen.name) {
         composable(PetScreens.SplashScreen.name) {
             SplashScreen(navController = navController)
+        }
+
+        composable(PetScreens.HomeScreen.name) {
+            HomeScreen(navController = navController)
+        }
+
+        composable(PetScreens.DetailScreen.name) {
+            DetailScreen(navController = navController)
         }
     }
 }
