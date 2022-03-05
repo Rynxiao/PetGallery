@@ -15,15 +15,15 @@ fun PetNavigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = PetScreens.SplashScreen.name) {
         composable(PetScreens.SplashScreen.name) {
-            SplashScreen(navController = navController)
+            SplashScreen(navController)
         }
 
         composable(PetScreens.HomeScreen.name) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController)
         }
 
-        composable(PetScreens.DetailScreen.name) {
-            DetailScreen(navController = navController)
+        composable("${PetScreens.DetailScreen.name}/{species}") { backStackEntry->
+            DetailScreen(navController, backStackEntry.arguments?.getString("species"))
         }
     }
 }

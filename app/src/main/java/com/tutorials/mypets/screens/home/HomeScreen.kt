@@ -15,8 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.toLowerCase
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -26,19 +24,19 @@ import com.tutorials.mypets.components.SearchInput
 import com.tutorials.mypets.data.pets
 import com.tutorials.mypets.model.Category
 import com.tutorials.mypets.model.Pet
+import com.tutorials.mypets.navigation.PetScreens
 import com.tutorials.mypets.ui.theme.fonts
 import java.util.*
 
 @ExperimentalComposeUiApi
 @Composable
 fun HomeScreen(navController: NavController) {
-    HomeContent()
+    HomeContent(navController)
 }
 
 @ExperimentalComposeUiApi
-@Preview
 @Composable
-fun HomeContent() {
+fun HomeContent(navController: NavController) {
     val textState = remember { mutableStateOf("") }
     val selectedCategoryState = remember { mutableStateOf(Category.CAT) }
     val petList = remember(textState.value, selectedCategoryState.value) {
@@ -80,12 +78,12 @@ fun HomeContent() {
         IconButtonGroup(selectedCategoryState = selectedCategoryState) {
             selectedCategoryState.value = it
         }
-        List(petList)
+        List(navController, petList)
     }
 }
 
 @Composable
-fun List(items: List<Pet> = pets) {
+fun List(navController: NavController, items: List<Pet> = pets) {
     LazyRow {
         this.items(items = items) { pet ->
             ListCard(
@@ -93,7 +91,9 @@ fun List(items: List<Pet> = pets) {
                     .size(width = 200.dp, height = 125.dp)
                     .padding(end = 20.dp),
                 pet = pet
-            ) {}
+            ) {
+                navController.navigate("${PetScreens.DetailScreen.name}/${it.species.name}")
+            }
         }
     }
 }
