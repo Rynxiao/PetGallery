@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.tutorials.mypets.R
 import com.tutorials.mypets.ui.theme.fonts
 
 @ExperimentalComposeUiApi
@@ -45,7 +47,11 @@ fun SearchInput(textState: MutableState<String>, onTextChange: (text: String) ->
         leadingIcon = {
             Icon(imageVector = Icons.Outlined.Search, contentDescription = "Search Icon")
         },
-        placeholder = { Text(text = "Search", fontFamily = fonts, color = Color.LightGray) },
+        placeholder = { Text(
+            text = stringResource(id = R.string.input_placeholder),
+            fontFamily = fonts,
+            color = Color.LightGray
+        ) },
         trailingIcon = {
             IconButton(onClick = {}) {
                 Icon(
