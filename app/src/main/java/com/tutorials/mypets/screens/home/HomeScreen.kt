@@ -2,6 +2,7 @@ package com.tutorials.mypets.screens.home
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -14,6 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,6 +40,7 @@ fun HomeScreen(navController: NavController) {
 @ExperimentalComposeUiApi
 @Composable
 fun HomeContent(navController: NavController) {
+    val focusManager = LocalFocusManager.current
     val textState = remember { mutableStateOf("") }
     val selectedCategoryState = remember { mutableStateOf(Category.CAT) }
     val petList = remember(textState.value, selectedCategoryState.value) {
@@ -55,6 +59,11 @@ fun HomeContent(navController: NavController) {
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
             .padding(20.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            }
     ) {
         Icon(
             imageVector = Icons.Filled.Pets,
