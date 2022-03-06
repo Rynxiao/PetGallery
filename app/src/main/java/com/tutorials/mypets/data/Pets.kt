@@ -1,6 +1,7 @@
 package com.tutorials.mypets.data
 
 import com.tutorials.mypets.R
+import com.tutorials.mypets.model.Banner
 import com.tutorials.mypets.model.Pet
 import com.tutorials.mypets.model.Species
 
@@ -18,4 +19,10 @@ val pets = listOf(
     Pet(11L, "Akira10", Species.ShibaInu, R.drawable.img_husky_4, "I'm cute"),
     Pet(12L, "Akira11", Species.Teddy, R.drawable.img_husky_2, "I'm cute"),
     Pet(13L, "Akira12", Species.TexasShepherd, R.drawable.img_husky_1, "I'm cute"),
+)
+
+val banner = listOf(
+    Banner(imageResource = R.drawable.on_boarding_1),
+    Banner(imageResource = R.drawable.on_boarding_2),
+    Banner(imageResource = R.drawable.on_boarding_3),
 )

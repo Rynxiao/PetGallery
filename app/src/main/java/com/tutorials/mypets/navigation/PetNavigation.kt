@@ -5,10 +5,12 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tutorials.mypets.screens.SplashScreen
 import com.tutorials.mypets.screens.detail.DetailScreen
 import com.tutorials.mypets.screens.home.HomeScreen
 
+@ExperimentalPagerApi
 @ExperimentalComposeUiApi
 @Composable
 fun PetNavigation() {

@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MyPets</string>
     <string name="input_placeholder">Search by species</string>
+    <string name="sub_title">Choose a location of your for \nfinding the nearest animals of you.</string>
+    <string name="banner_title">Find the nearest pet \nfrom your location</string>
 </resources>
