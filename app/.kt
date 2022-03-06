@@ -1,0 +1,5 @@
+data class (
+    val id: Int,
+    val imageRes: Int,
+    val name: String
+)
