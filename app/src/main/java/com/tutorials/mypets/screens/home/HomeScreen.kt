@@ -78,21 +78,39 @@ fun HomeContent(navController: NavController) {
         IconButtonGroup(selectedCategoryState = selectedCategoryState) {
             selectedCategoryState.value = it
         }
+        Text(
+            modifier = Modifier.padding(top = 10.dp),
+            text = "Your pets here!",
+            fontSize = 24.sp,
+            fontFamily = fonts,
+            fontWeight = FontWeight.Bold
+        )
         List(navController, petList)
     }
 }
 
 @Composable
 fun List(navController: NavController, items: List<Pet> = pets) {
-    LazyRow {
-        this.items(items = items) { pet ->
-            ListCard(
-                modifier = Modifier
-                    .size(width = 200.dp, height = 125.dp)
-                    .padding(end = 20.dp),
-                pet = pet
-            ) {
-                navController.navigate("${PetScreens.DetailScreen.name}/${it.species.name}")
+    if (items.isEmpty()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(70.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "No pets found!", fontFamily = fonts, fontSize = 18.sp);
+        }
+    } else {
+        LazyRow {
+            this.items(items = items) { pet ->
+                ListCard(
+                    modifier = Modifier
+                        .size(width = 200.dp, height = 125.dp)
+                        .padding(end = 20.dp),
+                    pet = pet
+                ) {
+                    navController.navigate("${PetScreens.DetailScreen.name}/${it.species.name}")
+                }
             }
         }
     }

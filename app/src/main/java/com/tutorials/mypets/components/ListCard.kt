@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tutorials.mypets.data.pets
@@ -44,8 +45,8 @@ fun ListCard(
             shape = RoundedCornerShape(20.dp)
         ) {
             Image(
-                painter = painterResource(id = pet.resource),
-                contentDescription = pet.name,
+                painter = painterResource(id = pet.samples[0].imageRes),
+                contentDescription = pet.samples[0].name,
                 contentScale = ContentScale.FillBounds
             )
         }
@@ -56,18 +57,24 @@ fun ListCard(
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 10.dp, bottom = 8.dp)
         )
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.Top) {
             Icon(
                 imageVector = Icons.Default.Pets,
                 contentDescription = "pets",
-                modifier = Modifier.padding(end = 5.dp).size(16.dp),
+                modifier = Modifier
+                    .padding(end = 5.dp)
+                    .size(16.dp),
                 tint = Color.Green.copy(alpha = 0.5f)
             )
-            Text(
-                text = pet.description,
-                fontSize = 14.sp,
-                fontFamily = fonts
-            )
+            Box(modifier = Modifier.width(140.dp)) {
+                Text(
+                    text = pet.description,
+                    fontSize = 14.sp,
+                    fontFamily = fonts,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }

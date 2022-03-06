@@ -3,6 +3,7 @@ package com.tutorials.mypets.components
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.tutorials.mypets.R
@@ -55,8 +57,10 @@ fun SearchInput(textState: MutableState<String>, onTextChange: (text: String) ->
         trailingIcon = {
             IconButton(onClick = {}) {
                 Icon(
-                    imageVector = Icons.Outlined.Phone,
-                    contentDescription = null
+                    painter = painterResource(id = R.drawable.ic_mic),
+                    contentDescription = null,
+                    tint = Color.DarkGray,
+                    modifier = Modifier.size(24.dp)
                 )
             }
         },
