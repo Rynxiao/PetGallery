@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Pets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -41,8 +42,8 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun HomeContent(navController: NavController) {
     val focusManager = LocalFocusManager.current
-    val textState = remember { mutableStateOf("") }
-    val selectedCategoryState = remember { mutableStateOf(Category.CAT) }
+    val textState = rememberSaveable { mutableStateOf("") }
+    val selectedCategoryState = rememberSaveable { mutableStateOf(Category.CAT) }
     val petList = remember(textState.value, selectedCategoryState.value) {
         pets.filter { pet ->
             val isInCategory = selectedCategoryState.value == pet.species.category
@@ -107,7 +108,7 @@ fun List(navController: NavController, items: List<Pet> = pets) {
                 .height(70.dp),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "No pets found!", fontFamily = fonts, fontSize = 18.sp);
+            Text(text = "No pets found!", fontFamily = fonts, fontSize = 18.sp)
         }
     } else {
         LazyRow {
