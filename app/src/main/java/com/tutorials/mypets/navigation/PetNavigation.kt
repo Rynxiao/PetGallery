@@ -20,11 +20,13 @@ fun PetNavigation() {
             SplashScreen(navController)
         }
 
-        composable(PetScreens.HomeScreen.name) {
+        composable(
+            PetScreens.HomeScreen.name
+        ) {
             HomeScreen(navController)
         }
 
-        composable("${PetScreens.DetailScreen.name}/{species}") { backStackEntry->
+        composable("${PetScreens.DetailScreen.name}/{species}") { backStackEntry ->
             DetailScreen(navController, backStackEntry.arguments?.getString("species"))
         }
     }
