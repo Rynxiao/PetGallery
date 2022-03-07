@@ -60,10 +60,10 @@ fun DetailScreen(
                     list = foundedPet.samples,
                     imageRadius = 15.dp
                 ) { sample ->
-                    val girlOrBody = if (sample.sex == Sex.Female) "girl" else "body"
+                    val girlOrBody = if (sample.sex == Sex.Female) "girl" else "boy"
                     val years =
                         LocalContext.current.resources.getQuantityString(R.plurals.age, sample.age)
-                    val notes = "${sample.brief} I'm a $girlOrBody and ${sample.age} $years now!!!"
+                    val notes = "${sample.brief} I'm a $girlOrBody and ${sample.age} $years old now!!!"
 
                     Image(
                         modifier = Modifier.fillMaxSize(),
