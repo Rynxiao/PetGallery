@@ -4,6 +4,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
@@ -17,10 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.tutorials.mypets.R
 import com.tutorials.mypets.components.DetailTopBar
 import com.tutorials.mypets.components.Pager
 import com.tutorials.mypets.data.pets
 import com.tutorials.mypets.model.ImageRes
+import com.tutorials.mypets.model.Sex
 import com.tutorials.mypets.model.Species
 import com.tutorials.mypets.ui.theme.fonts
 
@@ -57,27 +60,44 @@ fun DetailScreen(
                     list = foundedPet.samples,
                     imageRadius = 15.dp
                 ) { sample ->
+                    val girlOrBody = if (sample.sex == Sex.Female) "girl" else "body"
+                    val years =
+                        LocalContext.current.resources.getQuantityString(R.plurals.age, sample.age)
+                    val notes = "${sample.brief} I'm a $girlOrBody and ${sample.age} $years now!!!"
+
                     Image(
                         modifier = Modifier.fillMaxSize(),
                         painter = painterResource(id = (sample as ImageRes).imageRes),
                         contentDescription = "img husky",
                         contentScale = ContentScale.FillBounds
                     )
-                    Text(
-                        modifier = Modifier.offset(20.dp, 200.dp),
-                        text = sample.name,
-                        color = Color.White,
-                        fontFamily = fonts,
-                        fontSize = 18.sp,
-                    )
-                    Text(
-                        modifier = Modifier.offset(20.dp, 220.dp),
-                        text = sample.brief,
-                        color = Color.White,
-                        fontFamily = fonts,
-                        fontSize = 14.sp,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    Box(
+                        modifier = Modifier
+                            .offset(0.dp, 190.dp)
+                            .fillMaxWidth()
+                            .background(color = Color.Black.copy(alpha = 0.3f))
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(10.dp).fillMaxWidth(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.Start
+                        ) {
+                            Text(
+                                text = sample.name,
+                                color = Color.White,
+                                fontFamily = fonts,
+                                fontSize = 18.sp,
+                            )
+                            Text(
+                                text = notes,
+                                color = Color.White,
+                                fontFamily = fonts,
+                                fontSize = 14.sp,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
+                    }
+
                 }
             }
 

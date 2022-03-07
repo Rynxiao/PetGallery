@@ -3,4 +3,9 @@
     <string name="input_placeholder">Search by species</string>
     <string name="sub_title">Search for the cats and dogs \n feel their cuteness</string>
     <string name="banner_title">Come see your closest friends \n and play with them.</string>
+
+    <plurals name="age">
+        <item quantity="one">year</item>
+        <item quantity="other">years</item>
+    </plurals>
 </resources>
