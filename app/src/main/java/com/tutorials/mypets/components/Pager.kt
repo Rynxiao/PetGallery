@@ -1,8 +1,8 @@
 package com.tutorials.mypets.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -12,19 +12,22 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
-import com.tutorials.mypets.data.banner
-import com.tutorials.mypets.model.Banner
+import com.tutorials.mypets.model.ImageRes
 import com.tutorials.mypets.utils.lerp
 import kotlinx.coroutines.delay
 import kotlin.math.absoluteValue
 
-@Preview
 @ExperimentalPagerApi
 @Composable
-fun Pager(list: List<Banner> = banner) {
+fun <T> Pager(
+    modifier: Modifier = Modifier,
+    list: List<T>,
+    imageRadius: Dp = 10.dp,
+    content: @Composable (item: T) -> Unit
+) {
     val pagerState = rememberPagerState()
     LaunchedEffect(key1 = pagerState.currentPage) {
         delay(2000L)
@@ -34,12 +37,7 @@ fun Pager(list: List<Banner> = banner) {
     }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-                .scale(scaleX = 0.65f, scaleY = 1.0f)
-        ) {
+        Box(modifier = modifier) {
             HorizontalPager(
                 count = list.size,
                 state = pagerState,
@@ -71,14 +69,10 @@ fun Pager(list: List<Banner> = banner) {
                             )
                         }
                         .fillMaxWidth(),
-                    elevation = 0.dp
+                    elevation = 0.dp,
+                    shape = RoundedCornerShape(imageRadius)
                 ) {
-                    Image(
-                        modifier = Modifier.fillMaxSize(),
-                        painter = painterResource(id = list[page].imageResource),
-                        contentDescription = "img husky",
-                        contentScale = ContentScale.FillBounds
-                    )
+                    content(list[page])
                 }
             }
         }
