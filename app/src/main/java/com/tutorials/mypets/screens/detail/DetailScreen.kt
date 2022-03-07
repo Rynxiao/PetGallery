@@ -2,12 +2,8 @@ package com.tutorials.mypets.screens.detail
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
@@ -21,12 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.tutorials.mypets.components.DetailTopBar
 import com.tutorials.mypets.components.Pager
 import com.tutorials.mypets.data.pets
 import com.tutorials.mypets.model.ImageRes
 import com.tutorials.mypets.model.Species
 import com.tutorials.mypets.ui.theme.fonts
-import kotlinx.coroutines.coroutineScope
 
 @ExperimentalPagerApi
 @Preview
@@ -36,7 +32,12 @@ fun DetailScreen(
     species: String? = Species.Akita.name
 ) {
     Scaffold(
-        topBar = { DetailTopBar(navController = navController, species = species) }
+        topBar = {
+            DetailTopBar(
+                navController = navController,
+                species = species
+            )
+        }
     ) {
         Column(
             modifier = Modifier
@@ -101,53 +102,3 @@ fun DetailScreen(
     }
 }
 
-@Composable
-fun DetailTopBar(navController: NavController, species: String?) {
-    Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .padding(vertical = 15.dp)
-            .clickable { navController.popBackStack() }
-    ) {
-        Icon(
-            modifier = Modifier.width(48.dp),
-            imageVector = Icons.Default.ArrowBack,
-            contentDescription = "Back",
-            tint = MaterialTheme.colors.primary
-        )
-        Text(
-            text = species ?: "Species",
-            fontFamily = fonts,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
-        )
-    }
-}
-
-@Composable
-fun DetailLabel(title: String, content: String) {
-    Surface(
-        modifier = Modifier
-            .width(110.dp)
-            .padding(end = 15.dp),
-        border = BorderStroke(1.dp, color = Color.LightGray),
-        shape = RoundedCornerShape(8.dp),
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(vertical = 8.dp)
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = title,
-                fontSize = 14.sp,
-                fontFamily = fonts,
-                color = Color.DarkGray.copy(alpha = 0.8f)
-            )
-            Text(text = content, fontSize = 18.sp, fontFamily = fonts)
-        }
-    }
-}
